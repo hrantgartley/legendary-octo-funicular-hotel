@@ -3,14 +3,15 @@
  * @function initializeFormValidation
  */
 $(function () {
-    "use strict"
+  "use strict";
 
-    /**
-     * Handles form submission and validation.
-     * @param {Event} event - The submit event.
-     */
-    initializeFormValidation()
-})
+  /**
+   * Handles form submission and validation.
+   * @param {Event} event - The submit event.
+   */
+  initializeFormValidation();
+  populateSelect();
+});
 
 /**
  * Initializes form validation and handles form submission.
@@ -19,23 +20,41 @@ $(function () {
  * @returns {void}
  */
 function initializeFormValidation() {
-    "use strict"
-    // using strict mode to avoid accidental global variables
+  "use strict";
+  // using strict mode to avoid accidental global variables
 
-    /**
-     * Handles form submission and validation.
-     * @param {Event} event - The submit event.
-     */
-    $(".requires-validation").each(function () {
-        $(this).on("submit", function (event) {
-            if (!this.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            } else {
-                // not sure why this doesn't work date: 04/05/2024
-                $("#submit-message").text("Form submitted")
-            }
-            $(this).addClass("was-validated")
-        })
-    })
+  /**
+   * Handles form submission and validation.
+   * @param {Event} event - The submit event.
+   */
+  $(".requires-validation").each(function () {
+    $(this).on("submit", function (event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        // not sure why this doesn't work date: 04/05/2024
+        $("#submit-message").text("Form submitted");
+      }
+      $(this).addClass("was-validated");
+    });
+  });
+}
+
+let selectDropDownOptions = {
+  options: [
+    "Web Developer",
+    "Embedded Systems",
+    "Data Science",
+    "Machine Learning",
+    "Cloud Computing",
+  ],
+};
+
+function populateSelect() {
+  $("#selectMenu").append(
+    selectDropDownOptions.options
+      .map((option) => `<option>${option}</option>`)
+      .join("")
+  );
 }
